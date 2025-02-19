@@ -1,0 +1,11 @@
+----- RELATORIO GERAL -----
+- Qtd tickets: 1
+- Qtd tickets (A): 1
+- Qtd tickets (F): 0
+- Qtd usuarios: 4
+- Md idade usuarios: 39
+- Qtd tecnicos: 3
+- Md idade tecnicos: 49
+- Md trabalho tecnicos: 0
+---------------------------
+

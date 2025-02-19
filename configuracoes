@@ -1,0 +1,13 @@
+Arquivos
+	saida.txt=10
+Valgrind
+	desconto=0.5
+Validações
+	main=7.50
+	completo=0.0
+	fila=1.00
+	ticket=1.00
+    software=0.50
+
+LimiteTempo=25
+MainAgrupada

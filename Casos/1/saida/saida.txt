@@ -1,0 +1,68 @@
+----- BANCO DE USUARIOS -----
+--------------------
+- Nome: TAHM KENCH
+- CPF: 123.932.250-46
+- Data de Nascimento: 1/9/1955
+- Telefone: (34)96373-7004
+- Genero: OUTROS
+- Setor: RH
+- Tickets solicitados: 0
+--------------------
+- Nome: JINX MOREIRA
+- CPF: 351.574.251-43
+- Data de Nascimento: 1/4/2003
+- Telefone: (12)96210-7123
+- Genero: FEMININO
+- Setor: MARKETING
+- Tickets solicitados: 0
+--------------------
+- Nome: TWISTED FATE
+- CPF: 255.942.213-22
+- Data de Nascimento: 29/3/1995
+- Telefone: (78)96560-7074
+- Genero: MASCULINO
+- Setor: FINANCEIRO
+- Tickets solicitados: 0
+--------------------
+- Nome: VAINE MARIA
+- CPF: 524.456.852-98
+- Data de Nascimento: 2/4/1985
+- Telefone: (27)98733-1236
+- Genero: FEMININO
+- Setor: VENDAS
+- Tickets solicitados: 0
+----------------------------
+
+----- BANCO DE TECNICOS -----
+--------------------
+- Nome: JAYCE BARBOSA
+- CPF: 854.632.894-20
+- Data de Nascimento: 22/2/1990
+- Telefone: (37)9938-3382
+- Genero: MASCULINO
+- Area de Atuacao: GERAL
+- Salario: 2000.00
+- Disponibilidade: 7h
+- Tempo Trabalhado: 0h
+--------------------
+- Nome: HEIMERDINGER GARCIA
+- CPF: 456.987.123-96
+- Data de Nascimento: 20/10/1945
+- Telefone: (90)99876-1234
+- Genero: MASCULINO
+- Area de Atuacao: GERAL
+- Salario: 3500.00
+- Disponibilidade: 20h
+- Tempo Trabalhado: 0h
+--------------------
+- Nome: DR. MUNDO
+- CPF: 564.587.965-85
+- Data de Nascimento: 15/5/1988
+- Telefone: (34)98761-2345
+- Genero: OUTROS
+- Area de Atuacao: TI
+- Salario: 4200.00
+- Disponibilidade: 10h
+- Tempo Trabalhado: 0h
+----------------------------
+
