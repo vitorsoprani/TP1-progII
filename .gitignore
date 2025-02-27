@@ -1,2 +1,6 @@
 *.sh
-
+Resultados/
+Resultado.csv
+log.txt
+saida.json
+configuracoes
