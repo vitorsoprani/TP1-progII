@@ -1,106 +1,187 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+#include <string.h>
 
+#include "ticket.h"
 
-#ifndef _TICKET_H
-#define _TICKET_H
+#define DEBUG_TICKET    1
 
-#define MAX_TAM_ID 11
-#define MAX_TAM_CPF 15
+#define ABERTO          'A'
+#define FINALIZADO      'F'  
 
-/**
- * Estrutura de um Ticket contendo os parametros comuns entre todos os tipos de Tickets e um tipo genérico.
- */
-typedef struct Ticket Ticket;
+struct Ticket {
+    void* dado;
+    char* cpfSol;
+    char* id;
+    char status;
 
-/**
- * @brief Função de callback para notificar (imprimir) um ticket
- * @param dado um tipo genérico para representar os tipos de tickets.
- */
-typedef void (*func_ptr_notifica)(void *dado);
+    func_ptr_tempoEstimado getTempo;
+    func_ptr_tipo getTipo;
+    func_ptr_notifica notifica;
+    func_ptr_desaloca desaloca;
+};
 
-/**
- * @brief Função de callback para desalocar da memória uma implementação especifica de  ticket
- * @param dado um tipo genérico para representar os tipos de tickets.
- */
-typedef void (*func_ptr_desaloca)(void *dado);
-/**
- * Função de callback para retornar o tempo estimado para resolver um ticket
- * @param dado um tipo genérico para representar os tipos de tickets.
- * @return tempo estimado para resolver um ticket
- *
- *  */
-typedef int (*func_ptr_tempoEstimado)(void *dado);
+Ticket *criaTicket(char *cpfSol, void *dado, func_ptr_tempoEstimado getTempo, func_ptr_tipo getTipo, func_ptr_notifica notifica, func_ptr_desaloca desaloca) {
+    #if DEBUG_TICKET
+        assert(dado != NULL);
+    #else
+        if (dado == NULL)
+            return NULL;
+    #endif
+    
+    //  Alocando o ticket e tratando erros:
+    Ticket* t = (Ticket*)malloc(sizeof(Ticket));    
+    #if DEBUG_TICKET
+        assert(t != NULL);
+    #else
+        if (t == NULL)
+            return NULL;
+    #endif
 
-/**
- * Função de callback para retornar o tipo de um ticket
- * @param dado um tipo genérico para representar os tipos de tickets.
- * @return tipo do Ticket
- */
-typedef char (*func_ptr_tipo)();
+    //  Atribuindo os "métodos":
+    t->getTempo = getTempo;
+    t->getTipo = getTipo;
+    t->notifica = notifica;
+    t->desaloca = desaloca;
 
-/**
- * @brief Aloca uma estrutura Ticket na memória e inicializa os parâmetro necessários
- * @param cpfSol CPF de quem está solicitando a abertura do ticket
- * @param dado   Um ticket genérico  (considerando que existe mais de um tipo de ticket)
- * @param getTempo  Função de callback que retorna o tempo para aquele ticket ser resolvido
- * @param getTipo   Função de callback que retorna o tipo do ticket ser resolvido
- * @param notifica  Função de callback de notificação  (impressãode um ticket
- * @param desaloca  Função de callback que irá desalocar  um ticket da memória
- * @return  Uma estrutura Ticket inicializada.
- */
-Ticket *criaTicket(char *cpfSol, void *dado, func_ptr_tempoEstimado getTempo,
-                   func_ptr_tipo getTipo, func_ptr_notifica notifica, func_ptr_desaloca desaloca);
+    //  Alocando a string com espaço justificado:
+    t->cpfSol = (char*)malloc(sizeof(char) * (strlen(cpfSol) + 1)); 
+    #if DEBUG_TICKET
+        assert(t->cpfSol != NULL);
+    #endif
 
-/**
- * @brief Atribui um ID a um ticket
- * @param d Ticket inicializado
- * @param id ID a ser atribuido ao ticket
- */
-void setIDTicket(Ticket *d, char *id);
+    //  Atribuindo as strings:
+    if (t->cpfSol != NULL)
+        strcpy(t->cpfSol, cpfSol);
+    t->id = NULL;
 
-/**
- * @brief Finaliza um ticket
- * @param t Ticket inicializado
- */
-void finalizaTicket(Ticket *t);
+    t->dado = dado;
+    t->status = ABERTO;
 
-/**
- * @brief Recupera o CPF de quem solicitou a abertura do ticket
- * @param t Ticket inicializado
- * @return CPF de quem solicitou a abertura do ticket
- */
-char *getCPFSolicitanteTicket(Ticket *t);
+    return t;
+}
 
-/**
- * @brief Recupera o tempo estimado para resolver um ticket
- * @param t Ticket inicializado
- * @return tempo estimado para resolver um ticket
- */
-int getTempoEstimadoTicket(Ticket *t);
+void setIDTicket(Ticket *d, char *id) {
+    #if DEBUG_TICKET
+        assert(d != NULL);
+        assert(id != NULL);
+    #else
+        if (id == NULL || id == NULL)
+            return;
+    #endif
 
-/**
- * @brief Recupera o tipo de um ticket
- * @param t Ticket inicializado
- * @return tipo do Ticket
- */
-char getTipoTicket(Ticket *t);
+    //  Alocando a string com espaço justificado:
+    d->id = malloc(sizeof(char) * (strlen(id) + 1));
+    #if DEBUG_TICKET
+        assert(d != NULL);
+    #else
+        if (d->id == NULL)
+            return;
+    #endif
 
-/**
- * @brief Recupera o status de um ticket
- * @param t Ticket inicializado
- * @return status do Ticket
- */
-char getStatusTicket(Ticket *t);
+    strcpy(d->id, id);
+}
 
-/**
- * @brief  Desaloca um ticket da memória
- * @param doc estrutura do tipo Ticket que deve ser liberada da memória
- */
-void desalocaTicket(Ticket *doc);
+void finalizaTicket(Ticket *t) {
+    #if DEBUG_TICKET
+        assert(t != NULL);
+        assert(t->status == ABERTO);
+    #else
+        if (t == NULL)
+            return;
+    #endif
 
-/**
- * @brief  Notifica (imprime) um ticket
- * @param doc Ticket a ser notificado
- */
-void notificaTicket(Ticket *doc);
+    t->status = FINALIZADO;
+}
 
-#endif
+char *getCPFSolicitanteTicket(Ticket *t) {
+    #if DEBUG_TICKET
+        assert(t != NULL);
+        assert(t->cpfSol != NULL);
+    #else
+        if (t==NULL)
+            return "";
+        if (t->cpfSol == NULL)
+            return "";
+    #endif
+
+    return t->cpfSol;
+}
+
+int getTempoEstimadoTicket(Ticket *t) {
+    #if DEBUG_TICKET
+        assert(t != NULL);
+    #else
+        if (t == NULL)
+            return 0;
+    #endif
+
+    return t->getTempo(t->dado);
+}
+
+char getTipoTicket(Ticket *t) {
+    #if DEBUG_TICKET
+        assert(t != NULL);
+    #else
+        if (t == NULL)
+            return '\0';
+    #endif
+
+    return t->getTipo();
+}
+
+char getStatusTicket(Ticket *t) {
+    #if DEBUG_TICKET
+        assert(t != NULL);
+    #else
+        if (t == NULL)
+            return '\0';
+    #endif
+
+    return t->status;
+}
+
+void desalocaTicket(Ticket *doc) {
+    if (doc != NULL) {
+        free(doc->cpfSol);
+        free(doc->id);
+
+        doc->desaloca(doc->dado);
+        
+        free(doc);
+    }
+}
+
+void notificaTicket(Ticket *doc) {
+    #if DEBUG_TICKET
+        assert(doc != NULL);
+        assert(doc->dado != NULL);
+    #else
+        if (doc == NULL)
+            return;
+        if (doc->dado == NULL)
+            return;
+    #endif
+
+    printf("---------TICKET-----------\n");
+    printf("- ID: %s\n", doc->id);
+    printf("- Usuario solicitante: %s\n", doc->cpfSol);
+
+    doc->notifica(doc->dado);
+
+    printf("- Status: ");
+    if (doc->status == FINALIZADO) {
+        printf("Finalizado\n");
+    } else if (doc->status == ABERTO) {
+        printf("Aberto\n");
+    } else {
+        #if DEBUG_TICKET
+            printf("[ERRO] - Na funcao notificaTicket.\n\tStatus invalido. (%c).\n", doc->status);
+        #else
+            printf(" - ");
+        #endif
+    }
+
+    printf("-------------------------\n\n");
+}

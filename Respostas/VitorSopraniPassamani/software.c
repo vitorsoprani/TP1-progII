@@ -4,6 +4,7 @@
 #include <string.h>
 
 #include "software.h"
+// #include "utils.h"
 
 #define DEBUG_SOFTWARE  1
 
@@ -67,7 +68,7 @@ Software *lerSoftware() {
     int impacto;
 
 
-    // PARA DEPOIS: REFORMULAR LEIURA DE DADOS PARA TRATAR ERROS DE USUARIO.
+    //REFORMULAR LEIURA DE DADOS PARA TRATAR ERROS DE USUARIO.
     scanf("%[^\n]", nome);
     CleanBuffer();
     scanf("%[^\n]", categoria);
