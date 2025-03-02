@@ -6,7 +6,7 @@
 #include "software.h"
 // #include "utils.h"
 
-#define DEBUG_SOFTWARE  1
+#define DEBUG_SOFTWARE  0
 
 //Faz o casting de um ponteiro qualquer 'b' para um ponteiro do tipo 'a'.
 #define CAST(a, b) ((a*)b)
@@ -20,7 +20,7 @@ struct Software {
     int impacto;
 };
 
-void CleanBuffer() {
+void CleanBufferS() {
     while(getchar() != '\n') {};
 }
 
@@ -56,7 +56,7 @@ Software *criaSoftware(char *nome, char *categoria, int impacto, char *motivo) {
 
     s->impacto = impacto;
 
-    setTempoEstimadoSoftware(s);
+    s->tempoEstimado = 0;
 
     return s;
 }
@@ -70,12 +70,13 @@ Software *lerSoftware() {
 
     //REFORMULAR LEIURA DE DADOS PARA TRATAR ERROS DE USUARIO.
     scanf("%[^\n]", nome);
-    CleanBuffer();
+    CleanBufferS();
     scanf("%[^\n]", categoria);
-    CleanBuffer();
+    CleanBufferS();
     scanf("%d", &impacto);
-    CleanBuffer();
+    CleanBufferS();
     scanf("%[^\n]", motivo);
+    CleanBufferS();
 
     return criaSoftware(nome, categoria, impacto, motivo);
 }
@@ -106,7 +107,7 @@ int getTempoEstimadoSoftware(void *dado) {
     #if DEBUG_SOFTWARE
         assert(dado != NULL);
     #else 
-        if (s == NULL)
+        if (dado == NULL)
             return 0;
     #endif
 

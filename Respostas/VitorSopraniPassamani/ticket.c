@@ -5,7 +5,7 @@
 
 #include "ticket.h"
 
-#define DEBUG_TICKET    1
+#define DEBUG_TICKET    0
 
 #define ABERTO          'A'
 #define FINALIZADO      'F'  

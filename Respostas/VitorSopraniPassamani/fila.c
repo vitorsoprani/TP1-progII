@@ -4,7 +4,7 @@
 
 #include "fila.h"
 
-#define DEBUG_FILA 1
+#define DEBUG_FILA 0
 
 struct Fila {
     void** tickets;//Vetor de ponteiros que armazena os tickets da fila.
@@ -66,7 +66,7 @@ void insereTicketFila(Fila *f, char *cpfSol, void *dado, func_ptr_tempoEstimado 
         assert(f->tickets != NULL);
     #else
         if (f->tickets == NULL)
-            return f;
+            return;
     #endif
 
     f->tickets[f->qtdTickets - 1] = t;
@@ -124,7 +124,7 @@ void notificaFila(Fila *f) {
     #if DEBUG_FILA
         assert(f != NULL);
     #else
-        if (fila == NULL)
+        if (f == NULL)
             return;
     #endif
 
