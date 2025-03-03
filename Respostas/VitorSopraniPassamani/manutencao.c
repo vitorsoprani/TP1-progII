@@ -29,7 +29,7 @@ Manutencao* criaManutencao(char* item, char* estado, char* local) {
     //  Alocando somente a quantidade de memoria necessária para cada string:
     m->item = (char*)malloc(sizeof(char) * (strlen(item) + 1));
     m->estado = (char*)malloc(sizeof(char) * (strlen(estado) + 1));
-    m->local = (char*)malloc(sizeof(char) * (strlen(estado) + 1));
+    m->local = (char*)malloc(sizeof(char) * (strlen(local) + 1));
 
     #if DEBUG_MANUTENCAO
         assert(m->item != NULL);
