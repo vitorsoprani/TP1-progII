@@ -1,0 +1,125 @@
+----- BANCO DE USUARIOS -----
+--------------------
+- Nome: SYLAS REIS
+- CPF: 132.465.798-02
+- Data de Nascimento: 10/10/1984
+- Telefone: (11)99765-3210
+- Genero: OUTROS
+- Setor: RH
+- Tickets solicitados: 0
+--------------------
+- Nome: MISS FORTUNE TEIXEIRA
+- CPF: 246.135.790-13
+- Data de Nascimento: 12/2/1989
+- Telefone: (21)98741-3652
+- Genero: FEMININO
+- Setor: FINANCEIRO
+- Tickets solicitados: 0
+--------------------
+- Nome: TALON FIGUEIREDO
+- CPF: 357.246.801-24
+- Data de Nascimento: 20/7/1992
+- Telefone: (31)95698-7432
+- Genero: MASCULINO
+- Setor: P&D
+- Tickets solicitados: 0
+--------------------
+- Nome: RIVEN SOUZA
+- CPF: 468.357.912-35
+- Data de Nascimento: 18/11/1981
+- Telefone: (41)97412-3589
+- Genero: FEMININO
+- Setor: MARKETING
+- Tickets solicitados: 0
+--------------------
+- Nome: EKKO NUNES
+- CPF: 579.468.023-46
+- Data de Nascimento: 6/5/1996
+- Telefone: (51)98742-1365
+- Genero: MASCULINO
+- Setor: VENDAS
+- Tickets solicitados: 0
+--------------------
+- Nome: LEONA PEREIRA
+- CPF: 680.579.134-57
+- Data de Nascimento: 1/8/1994
+- Telefone: (61)95487-6321
+- Genero: OUTROS
+- Setor: RH
+- Tickets solicitados: 0
+--------------------
+- Nome: MORDEKAISER MARTINS
+- CPF: 791.680.245-68
+- Data de Nascimento: 23/9/1986
+- Telefone: (71)98752-4569
+- Genero: MASCULINO
+- Setor: P&D
+- Tickets solicitados: 0
+--------------------
+- Nome: FIORA GONCALVES
+- CPF: 802.791.356-79
+- Data de Nascimento: 29/3/1979
+- Telefone: (81)97485-6321
+- Genero: FEMININO
+- Setor: MARKETING
+- Tickets solicitados: 0
+----------------------------
+
+----- BANCO DE TECNICOS -----
+--------------------
+- Nome: ZED SILVA
+- CPF: 123.456.789-01
+- Data de Nascimento: 15/3/1985
+- Telefone: (11)98765-4321
+- Genero: MASCULINO
+- Area de Atuacao: GERAL
+- Salario: 4000.00
+- Disponibilidade: 30h
+- Tempo Trabalhado: 0h
+--------------------
+- Nome: AHRI COSTA
+- CPF: 234.567.890-12
+- Data de Nascimento: 22/7/1990
+- Telefone: (21)91234-5678
+- Genero: FEMININO
+- Area de Atuacao: GERAL
+- Salario: 4800.00
+- Disponibilidade: 25h
+- Tempo Trabalhado: 0h
+--------------------
+- Nome: YASUO FERREIRA
+- CPF: 345.678.901-23
+- Data de Nascimento: 10/5/1982
+- Telefone: (31)92345-6789
+- Genero: MASCULINO
+- Area de Atuacao: TI
+- Salario: 5200.00
+- Disponibilidade: 40h
+- Tempo Trabalhado: 0h
+--------------------
+- Nome: GAREN SANTOS
+- CPF: 901.234.567-89
+- Data de Nascimento: 14/8/1983
+- Telefone: (91)98901-2345
+- Genero: MASCULINO
+- Area de Atuacao: TI
+- Salario: 4300.00
+- Disponibilidade: 22h
+- Tempo Trabalhado: 0h
+----------------------------
+
+----- FILA DE TICKETS -----
+---------TICKET-----------
+- ID: Tick-1
+- Usuario solicitante: 791.680.245-68
+- Tipo: Software
+- Nome do software: OUTLOOK
+- Categoria: BUG
+- Nível do impacto: 4
+- Motivo: EMAILS NAO ESTAO SENDO ENVIADOS
+- Tempo estimado: 7h
+- Status: Aberto
+-------------------------
+
+---------------------------
+
