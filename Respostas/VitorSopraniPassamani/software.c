@@ -6,7 +6,7 @@
 #include "software.h"
 // #include "utils.h"
 
-#define DEBUG_SOFTWARE  0
+#define DEBUG_SOFTWARE  1
 
 //Faz o casting de um ponteiro qualquer 'b' para um ponteiro do tipo 'a'.
 #define CAST(a, b) ((a*)b)

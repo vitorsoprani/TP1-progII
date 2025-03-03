@@ -6,7 +6,7 @@
 #include "manutencao.h"
 #include "utils.h"
 
-#define DEBUG_MANUTENCAO 0
+#define DEBUG_MANUTENCAO 1
 
 struct Manutencao {
     char* item;

@@ -4,7 +4,7 @@
 
 #include "fila.h"
 
-#define DEBUG_FILA 0
+#define DEBUG_FILA 1
 
 struct Fila {
     void** tickets;//Vetor de ponteiros que armazena os tickets da fila.
