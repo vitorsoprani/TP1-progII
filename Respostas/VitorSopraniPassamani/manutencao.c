@@ -143,7 +143,7 @@ void desalocaManutencao(void* dado) {
 }
 
 void notificaManutencao(void* dado) {
-    #if DEBUG_SOFTWARE
+    #if DEBUG_MANUTENCAO
         assert(dado != NULL);
     #else
         if (dado == NULL)

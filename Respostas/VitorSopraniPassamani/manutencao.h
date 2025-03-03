@@ -28,7 +28,7 @@ Manutencao* lerManutencao();
 
 
 /**
- * @brief Calcula o tempo estimado para resolver um ticket do tipo software;
+ * @brief Calcula o tempo estimado para resolver um ticket do tipo manutencao;
  * Tempo estimado depende do estado de conservação do item e do setor do usuario solicitante.
  * @param m A manutenção que tera o tempo estimado;
  * @param setor O setor do usuario solicitante.
