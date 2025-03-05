@@ -69,7 +69,7 @@ int atribuiTrabalhoTecnico(Tecnico* t, int tempoTrabalho) {
             return 0;
     #endif
 
-    if (getDisponibilidadeAtualTecnico(t) <= tempoTrabalho) {
+    if (getDisponibilidadeAtualTecnico(t) >= tempoTrabalho) {
         t->disponibilidade -= tempoTrabalho;
         t->tempoTrabalhado += tempoTrabalho;
         return 1;
