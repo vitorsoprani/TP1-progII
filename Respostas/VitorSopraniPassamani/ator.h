@@ -59,13 +59,13 @@ typedef int (*fptr_comparaAtor)(void* dado1, void* dado2);
  * @param detTipo Função de calback que retrorna o tipo do ator.
  * @return Um ponteiro para uma estrutura do tipo Ator alocada dinamicamente e com os parametros inicializados.
  */
-Ator* criaAtor(char* nome, char* cpf, Data* dataNascimento, char* telefone, char* genero, void* dado, fptr_desalocaAtor desaloca, fptr_imprimeAtor imprime, fptr_tipoAtor getTipo);
+Ator* criaAtor(char* nome, char* cpf, Data* dataNascimento, char* telefone, char* genero, void* dado, fptr_desalocaAtor desaloca, fptr_imprimeAtor imprime);
 
 /**
  * @brief Função que desaloca um Ator.
  * @param a Ator a ser desalocado.
  */
-void dealocaAtor(Ator* a);
+void desalocaAtor(Ator* a);
 
 /**
  * @brief Função que imprime um Ator.
@@ -91,12 +91,10 @@ int getIdadeAtor(Ator* a, Data* dataAtual);
 void* getAtributoEspecificoAtor(Ator* a, fptr_getAtributoAtor getAtributo);
 
 /**
- * @brief Funcao que compara dois atores de acordo com a função de callback fornecida.
- * @param a1 O primeiro ator a ser comparado.
- * @param a2 O segundo ator a ser comparado.
- * @param compara Função que compara os dados dos dois atores
- * @return Um número positivo se o a1 deve vir depois do a2, um numero negativo se a1 deve vir antes do a2 e 0 se a1 e a2 são "empatados".
+ * @brief Retorna o ponteiro com os dados especificos de um Ator.
+ * @param a O ator a ter seus dados retornados.
+ * @return Um ponteiro para os dados do ator.
  */
-int comparaAtor(Ator* a1, Ator* a2, fptr_comparaAtor compara);
+void* getDadoAtor(Ator* a);
 
 #endif

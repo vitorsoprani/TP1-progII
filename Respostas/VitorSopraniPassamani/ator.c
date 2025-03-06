@@ -15,13 +15,12 @@ struct Ator {
     Data* dataNascimento;
     char* telefone;
     char* genero;
-    
+
     fptr_desalocaAtor desaloca;
     fptr_imprimeAtor imprime;
-    fptr_tipoAtor getTipo;
 };
 
-Ator* criaAtor(char* nome, char* cpf, Data* dataNascimento, char* telefone, char* genero, void* dado, fptr_desalocaAtor desaloca, fptr_imprimeAtor imprime, fptr_tipoAtor getTipo) {
+Ator* criaAtor(char* nome, char* cpf, Data* dataNascimento, char* telefone, char* genero, void* dado, fptr_desalocaAtor desaloca, fptr_imprimeAtor imprime) {
     #if DEBUG_ATOR
         assert(dataNascimento != NULL);
         assert(dado != NULL);
@@ -65,12 +64,11 @@ Ator* criaAtor(char* nome, char* cpf, Data* dataNascimento, char* telefone, char
     a->dataNascimento = dataNascimento;
     a->desaloca = desaloca;
     a->imprime = imprime;
-    a->getTipo = getTipo;
 
     return a;
 }
 
-void dealocaAtor(Ator* a) {
+void desalocaAtor(Ator* a) {
     if ( a != NULL) {
         free(a->nome);
         free(a->cpf);
@@ -126,14 +124,13 @@ void* getAtributoEspecificoAtor(Ator* a, fptr_getAtributoAtor getAtributo) {
     return getAtributo(a->dado);
 }
 
-int comparaAtor(Ator* a1, Ator* a2, fptr_comparaAtor compara) {
+void* getDadoAtor(Ator* a) {
     #if DEBUG_ATOR
-        assert(a1 != NULL);
-        assert(a2 != NULL);
+        assert(a != NULL);
     #else
-        if (a1 == NULL || a2 == NULL)
-            return 0;
+        if (a == NULL)
+            return NULL
     #endif
 
-    return compara(a1->dado, a2->dado);
+    return a->dado;
 }
