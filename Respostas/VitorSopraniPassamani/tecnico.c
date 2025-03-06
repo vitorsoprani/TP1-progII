@@ -132,3 +132,15 @@ void imprimeTecnico(void* dado) {
     printf("- Disponibilidade: %dh\n", CAST(Tecnico, dado)->disponibilidade);
     printf("- Tempo Trabalhado: %dh\n", CAST(Tecnico, dado)->tempoTrabalhado);
 }
+
+int comparaTecnicos(void* dado1, void* dado2) {
+    #if DEBUG_TECNICO
+        assert(dado1 != NULL);
+        assert(dado2 != NULL);
+    #else
+        if (dado1 == NULL || dado2 == NULL)
+            return 0;
+    #endif
+
+    return CAST(Tecnico, dado1)->tempoTrabalhado - CAST(Tecnico, dado2)->tempoTrabalhado;
+}

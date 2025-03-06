@@ -92,3 +92,15 @@ void imprimeUsuario(void* dado) {
     printf("- Setor: %s\n", CAST(Usuario, dado)->setor);
     printf("- Tickets soliciatos: %d\n", CAST(Usuario, dado)->qtdTickets);
 }
+
+int comparaUsuarios(void* dado1, void* dado2) {
+    #if DEBUG_USUARIO
+        assert(dado1 != NULL);
+        assert(dado2 != NULL);
+    #else
+        if (dado1 == NULL || dado2 == NULL)
+            return 0;
+    #endif
+
+    return CAST(Usuario, dado1)->qtdTickets - CAST(Usuario, dado2)->qtdTickets;
+}

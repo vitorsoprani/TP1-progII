@@ -45,4 +45,12 @@ void desalocaUsuario(void* dado);
  */
 void imprimeUsuario(void* dado);
 
+/**
+ * @brief Comprara os dados de 2 usuarios.
+ * @param dado1 O prmeiro usuario da comparação.
+ * @param dado2 O segund usuario da comparação.
+ * @return Um numero positivo se o primeiro usuario deve vir depois que o segundo, Um numero negativo se o primeiro usuario deve vir antes do segundo, 0 se os dois usuarios estão "empatados".
+ */
+int comparaUsuarios(void* dado1, void* dado2);
+
 #endif

@@ -64,4 +64,12 @@ void desalocaTecnico(void* dado);
  */
 void imprimeTecnico(void* dado);
 
+/**
+ * @brief Comprara os dados de 2 tecnicos.
+ * @param dado1 O prmeiro tecnico da comparação.
+ * @param dado2 O segund tecnico da comparação.
+ * @return Um numero positivo se o primeiro tecnico deve vir depois que o segundo, Um numero negativo se o primeiro tecnico deve vir antes do segundo, 0 se os dois tecnicos estão "empatados".
+ */
+int comparaTecnicos(void* dado1, void* dado2);
+
 #endif
