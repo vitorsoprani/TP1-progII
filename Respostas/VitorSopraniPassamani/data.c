@@ -50,27 +50,6 @@ void imprimeData(Data* d) {
     printf("%d/%d/%d\n", d->dia, d->mes, d->ano);
 }
 
-int comparaData(Data* d1, Data* d2) {
-    #if DEBUG_DATA
-        assert(d1 != NULL);
-        assert(d2 != NULL);
-    #else
-        if (d1 == NULL || d2 == NULL)
-            return 0;
-    #endif
-
-    if (d1->dia != d2->dia)
-        return 0;
-    
-    if (d1->mes != d2->mes)
-        return 0;
-    
-    if (d1->ano != d2->ano)
-        return 0;
-    
-    return 1;
-}
-
 int calculaDiferencaAnosData(Data* d1, Data* d2) {
     #if DEBUG_DATA
         assert(d1 != NULL);
