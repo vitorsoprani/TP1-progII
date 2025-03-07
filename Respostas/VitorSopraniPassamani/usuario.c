@@ -73,6 +73,17 @@ int getTicketsUsuario(Usuario* u) {
     return u->qtdTickets;
 }
 
+char* getSetorUsuario(Usuario* u) {
+    #if DEBUG_USUARIO
+        assert(u != NULL);
+    #else
+        if (u == NULL)
+            return NULL;
+    #endif
+
+    return u->setor;
+}
+
 void desalocaUsuario(void* dado) {
     if (dado != NULL) {
         free(CAST(Usuario, dado)->setor);
@@ -90,7 +101,7 @@ void imprimeUsuario(void* dado) {
     #endif
 
     printf("- Setor: %s\n", CAST(Usuario, dado)->setor);
-    printf("- Tickets soliciatos: %d\n", CAST(Usuario, dado)->qtdTickets);
+    printf("- Tickets solicitados: %d\n", CAST(Usuario, dado)->qtdTickets);
 }
 
 int comparaUsuarios(void* dado1, void* dado2) {

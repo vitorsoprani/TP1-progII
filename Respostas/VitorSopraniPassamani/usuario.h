@@ -34,6 +34,12 @@ void incrementaTicketsUsuario(Usuario* u);
 int getTicketsUsuario(Usuario* u);
 
 /**
+ * @brief Retorna o setor de um usuario.
+ * @param u O usuario.
+ */
+char* getSetorUsuario(Usuario* u);
+
+/**
  * @brief Desaloca um struct do tipo USUARIO.
  * @param dado O usuario a ser desalocado.
  */
