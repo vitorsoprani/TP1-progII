@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <string.h>
 
 #include "banco.h"
 
@@ -54,6 +55,7 @@ void imprimeBanco(Banco* b) {
     #endif
 
     for (int i = 0; i < b->qtdAtores; i++) {
+        printf("--------------------\n");
         imprimeAtor(b->atores[i]);
     }
 }
@@ -71,6 +73,22 @@ Ator* getAtorBanco(Banco* b, int idx) {
     #endif
 
     return b->atores[idx];
+}
+
+Ator* getAtorPorCPFBanco(Banco* b, char* cpf) {
+    #if DEBUG_BANCO
+        assert(b != NULL);
+    #else
+        if (b == NULL)
+            return NULL;
+    #endif
+
+    for (int i = 0; i < b->qtdAtores; i++) {
+        if (strcmp(getCPFAtor(b->atores[i]), cpf) == 0)
+            return b->atores[i];
+    }
+
+    return NULL;
 }
 
 void insereAtorBanco(Banco* b, Ator* a) {

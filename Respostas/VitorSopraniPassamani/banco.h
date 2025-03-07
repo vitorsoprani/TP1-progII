@@ -43,6 +43,14 @@ void imprimeBanco(Banco* b);
 Ator* getAtorBanco(Banco* b, int idx);
 
 /**
+ * @brief Retorna o ponteiro para o ator com cpf fornecido.
+ * @param b O banco a ser buscado o cpf.
+ * @param cpf O cpf do ator a ser buscado.
+ * @return O ponteiro para o ator a ter o cpf buscado. Caso o ator não exista a função retorna NULL.
+ */
+Ator* getAtorPorCPFBanco(Banco* b, char* cpf);
+
+/**
  * @brief Função que insere um novo ator no banco fazendo o gerenciamento necessario da memeoria.
  * @param b O banco a ser modificado.
  * @param a o Ator que será inserido.
