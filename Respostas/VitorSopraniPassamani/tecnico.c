@@ -60,7 +60,7 @@ Tecnico* lerTecnico() {
     return criaTecnico(area, salario, disponibilidade);
 }
 
-int atribuiTrabalhoTecnico(Tecnico* t, int tempoTrabalho) {
+void atribuiTrabalhoTecnico(Tecnico* t, int tempoTrabalho) {
     #if DEBUG_TECNICO
         assert(t != NULL);
         assert(tempoTrabalho > 0);
@@ -69,13 +69,8 @@ int atribuiTrabalhoTecnico(Tecnico* t, int tempoTrabalho) {
             return 0;
     #endif
 
-    if (getDisponibilidadeAtualTecnico(t) >= tempoTrabalho) {
-        t->disponibilidade -= tempoTrabalho;
-        t->tempoTrabalhado += tempoTrabalho;
-        return 1;
-    }
-
-    return 0;
+    t->disponibilidade -= tempoTrabalho;
+    t->tempoTrabalhado += tempoTrabalho;
 }
 
 int getDisponibilidadeAtualTecnico(Tecnico* t) {

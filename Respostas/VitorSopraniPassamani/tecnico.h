@@ -23,13 +23,11 @@ Tecnico* criaTecnico(char* area, float salario, int disponibilidade);
 Tecnico* lerTecnico();
 
 /**
- * @brief Caso tecnico tenha tempo disponivel, incrementa o tempo trabalhado no valor indicado.
- * Caso o tecnico NÃO consiga realizar o trbalho, o mesmo segue inalterado após a chamada da função.
+ * @brief Altera o tempo trabalhado e a disponibilidade no valor indicado.
  * @param t Tecnico que "tentará" realizar o trabalho;
  * @param tempoTrabalho Tempo que levará para realizar o trabalho em questão;
- * @return 1 caso o tecnico consiga realizar o trabalho e 0 caso contrario.
  */
-int atribuiTrabalhoTecnico(Tecnico* t, int tempoTrabalho);
+void atribuiTrabalhoTecnico(Tecnico* t, int tempoTrabalho);
 
 /**
  * @brief Retorna quanto tempo o técnico ainda tem disponível para trabalha.
