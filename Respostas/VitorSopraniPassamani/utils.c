@@ -3,5 +3,8 @@
 #include "utils.h"
 
 void CleanBuffer() {
-    while(getchar() != '\n') {};
+    char c = 0;
+    while(c != '\n' && c != EOF) {
+        c = getchar();
+    }
 }
