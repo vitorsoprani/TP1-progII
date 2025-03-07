@@ -82,6 +82,13 @@ void imprimeAtor(Ator* a);
 int getIdadeAtor(Ator* a, Data* dataAtual);
 
 /**
+ * @brief Função que retorna o cpf de um ator.
+ * @param a O ator.
+ * @return A string contendo o cpf do ator.
+ */
+char* getCPFAtor(Ator* a);
+
+/**
  * @brief Função que retorna um atributo especifico do ator (de acordo com a função callback passada).
  * @param a O ator a ter seu atributo especifico retornado.
  * @param getAtributo Função que retorna o atributo desejado.

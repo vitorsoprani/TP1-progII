@@ -113,6 +113,17 @@ int getIdadeAtor(Ator* a, Data* dataAtual) {
     return calculaDiferencaAnosData(a->dataNascimento, dataAtual);
 }
 
+char* getCPFAtor(Ator* a) {
+    #if DEBUG_ATOR
+        assert(a != NULL);
+    #else
+        if (a == NULL)
+            return NULL;
+    #endif
+
+    return a->cpf;
+}
+
 void* getAtributoEspecificoAtor(Ator* a, fptr_getAtributoAtor getAtributo) {
     #if DEBUG_ATOR
         assert(a != NULL);
