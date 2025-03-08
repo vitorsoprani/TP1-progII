@@ -1,41 +1,59 @@
 #include <stdio.h>
+#include <string.h>
 
-#include "manutencao.h"
-#include "software.h"
-#include "outros.h"
-#include "fila.h"
+#include "sistema.h"
+#include "utils.h"
+
+#define MAX_TAM_ENTRADA 10
 
 int main() {
-    Fila* tickets = criaFila();
+    Data* hoje = criaData(18, 2, 2025);
 
-    Software* s;
-    Manutencao* m;
-    Outros* o;
-
-    char tipo = '\0';
-    char cpf[MAX_TAM_CPF];
+    Sistema* sistema = criaSistema(hoje);
+    
+    char opcao = 0;
 
     while(1) {
-        scanf("%c%*c", &tipo);
-        
-        if (tipo == 's') {
-            scanf("%[^\n]%*c", cpf);
-            s = lerSoftware();
-            insereTicketFila(tickets, cpf, s, getTempoEstimadoSoftware, getTipoSoftware, notificaSoftware, desalocaSoftware);
-        } else if (tipo == 'm') {
-            scanf("%[^\n]%*c", cpf);
-            m = lerManutencao();
-            insereTicketFila(tickets, cpf, m, getTempoEstimadoManutencao, getTipoManutencao, notificaManutencao, desalocaManutencao);
-        } else if (tipo == 'o') {
-            scanf("%[^\n]%*c", cpf);
-            o = lerOutros();
-            insereTicketFila(tickets, cpf, o, getTempoEstimadoOutros, getTipoOutros, notificaOutros, desalocaOutros);
-        } else {
+        scanf("%c", &opcao);
+        CleanBuffer();
+
+        if (opcao == 'F') {
             break;
+        } else if (opcao == 'U') {
+            insereAtorSistema(sistema, "USUARIO");
+        } else if (opcao == 'T') {
+           insereAtorSistema(sistema, "TECNICO");
+        } else if (opcao == 'A') {
+            insereTicketSistema(sistema);
+        } else if (opcao == 'E') {
+            char entrada[MAX_TAM_ENTRADA];
+            scanf("%s", entrada);
+
+            if (strcmp("NOTIFICA", entrada) == 0) {
+                CleanBuffer();
+                notificaTicketsSistema(sistema);
+            } else if (strcmp("TECNICOS", entrada) == 0) {
+                CleanBuffer();
+                imprimeBancoSistema(sistema, "TECNICOS");
+            } else if (strcmp("USUARIOS", entrada) == 0) {
+                CleanBuffer();
+                imprimeBancoSistema(sistema, "USUARIOS");
+            } else if (strcmp("DISTRIBUI", entrada) == 0) {
+                CleanBuffer();
+                distribuiTicketsSistema(sistema);
+            } else if (strcmp("RANKING", entrada) == 0) {
+                char opcaoBanco[MAX_TAM_ENTRADA];
+                scanf(" %s", opcaoBanco);
+                CleanBuffer();
+
+                imprimeRankingSistema(sistema, opcaoBanco);
+            } else if (strcmp("RELATORIO", entrada) == 0) {
+                CleanBuffer();
+                imprimeRelatorioSistema(sistema);
+            }
         }
     }
-    
-    notificaFila(tickets);
-    desalocaFila(tickets);
+
+    desalocaSistema(sistema);
     return 0;
 }
