@@ -1,3 +1,13 @@
+/**
+ * ATENÇÂO: Recado ao programador que eventualmente pode ler esse código.
+ * Se você está lendo isso significa que eu nunca voltei aqui para consertar as linhas de códigos "temporarias".
+ * Me sinto no dever de deixar claro que me envergonho de mais de 90% do código que está escrito neste arquivo
+ * (nos outros até que a situação está aceitável).
+ * Prometo que sou melhor que isso e que algum dia ainda retorno para consertar, mas agora não da, parece que
+ * todas as provas do semestre se acumularam para uma única semana e eu preciso colocar muito conteudo em dia.
+ * Ass. Vitor.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -326,4 +336,49 @@ void imprimeRankingSistema(Sistema* sis, char* tipo) {
     desalocaCopiaBanco(b);
 }
 
-void imprimeRelatorioSistema(Sistema* sis);
+void imprimeRelatorioSistema(Sistema* sis) {
+    #if DEBUG_SISTEMA
+        assert(sis != NULL);
+    #else
+        if (sis == NULL)
+            return;
+    #endif
+
+    int mediaIdadeUsuarios = 0;
+    int mediaIdadeTecnicos = 0;
+    int mediaTrabalhoTecnicos = 0;
+
+    int qtdUsuarios = getTamanhoBanco(sis->usuarios);
+    
+    int somaIdades = 0;
+    for (int i = 0; i < qtdUsuarios; i++) {
+        somaIdades += getIdadeAtor(getAtorBanco(sis->usuarios, i), sis->dataAtual);
+    }
+
+    mediaIdadeUsuarios = somaIdades/qtdUsuarios;
+
+    somaIdades = 0;
+    int somaTrabalhos = 0;
+    int qtdTecnicos = getTamanhoBanco(sis->tecnicos);
+
+    for (int i = 0; i < qtdTecnicos; i++) {
+        Ator* a = getAtorBanco(sis->tecnicos, i);
+        somaIdades += getIdadeAtor(a, sis->dataAtual);
+        somaTrabalhos += getTempoTrabalhadoTecnico(getDadoAtor(a));
+    }
+    mediaIdadeTecnicos = somaIdades/qtdTecnicos;
+    mediaTrabalhoTecnicos = somaTrabalhos/qtdTecnicos;
+
+
+
+    printf("----- RELATORIO GERAL -----\n");
+    printf("- Qtd tickets: %d\n", getQtdTicketsNaFila(sis->tickets));
+    printf("- Qtd tickets (A): %d\n", getQtdTicketsPorStatusNaFila(sis->tickets, 'A'));
+    printf("- Qtd tickets (F): %d\n", getQtdTicketsPorStatusNaFila(sis->tickets, 'F'));
+    printf("- Qtd usuarios: %d\n", getTamanhoBanco(sis->usuarios));
+    printf("- Md idade usuarios: %d\n", mediaIdadeUsuarios);
+    printf("- Qtd tecnicos: %d\n", getTamanhoBanco(sis->tecnicos));
+    printf("- Md idade tecnicos: %d\n", mediaIdadeTecnicos);
+    printf("- Md trabalho tecnicos: %d\n", mediaTrabalhoTecnicos);
+    printf("---------------------------\n\n");
+}
