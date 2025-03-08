@@ -129,14 +129,79 @@ int getTamanhoBanco(Banco* b) {
  * @brief Função que ordena um banco de acordo com sua função callback de comparação.
  * @param b O banco a ser ordenado.
  */
-void ordenaBanco(Banco* b);
+void ordenaBanco(Banco* b) {
+    #if DEBUG_BANCO
+        assert(b != NULL);
+    #else
+        if (b == NULL)
+            return NULL;
+    #endif
+
+    //BUBBLE SORT:
+    for (int i = 0; i < getTamanhoBanco(b) - 1; i++) {
+        int trocou = 0;
+        for (int j = 0; j < getTamanhoBanco(b) - i - 1; j++) {
+            if (comparaAtoresBanco(b, j, j + 1) > 0) {
+                Ator* aux = b->atores[j];
+                b->atores[j] = b->atores[j + 1];
+                b->atores[j + 1] = aux;
+
+                trocou = 1;
+            }
+        }
+        if (!trocou)
+            break;
+    }
+}
 
 /**
  * @brief Função que cria uma copia de um banco.
- * @param destino Estrutura do tipo banco que receberá a cópia.
+ * @brief ATENÇÃO: as referencias são compartilhadas entre a copia e o original. as alterações feitas em um aparecerão no outro.
  * @param origem Estrutura original que será copiada.
+ * @return A copia da estrurura fornecida.
  */
-void copiaBanco(Banco* destino, Banco* origem);
+Banco* copiaBanco(Banco* origem) {
+    #if DEBUG_BANCO
+        assert(origem != NULL);
+    #else
+        if (origem == NULL)
+            return NULL;
+    #endif
+
+    Banco* copia = (Banco*)malloc(sizeof(Banco));
+
+    #if DEBUG_BANCO
+        assert(copia != NULL);
+    #else
+        if (copia == NULL)
+            return NULL;
+    #endif
+
+    copia->qtdAtores = origem->qtdAtores;
+    copia->compara = origem->compara;
+    
+    copia->atores = (Ator**)malloc(sizeof(Ator*) * copia->qtdAtores);
+
+    #if DEBUG_BANCO
+        assert(copia->atores != NULL);
+    #else
+        if (copia->atores == NULL)
+            return NULL;
+    #endif
+
+    for (int i = 0; i < copia->qtdAtores; i++) {
+        copia->atores[i] = origem->atores[i];
+    }
+
+    return copia;
+}
+
+void desalocaCopiaBanco(Banco* b) {
+    if (b != NULL) {
+        free(b->atores);
+        free(b);
+    }
+}
 
 int comparaAtoresBanco(Banco* b, int idx1, int idx2) {
     #if DEBUG_BANCO
@@ -149,5 +214,11 @@ int comparaAtoresBanco(Banco* b, int idx1, int idx2) {
     Ator* a1 = getAtorBanco(b, idx1);
     Ator* a2 = getAtorBanco(b, idx2);
 
-    return b->compara(getDadoAtor(a1), getDadoAtor(a2));
+    int result = b->compara(getDadoAtor(a1), getDadoAtor(a2));
+
+    if (result == 0) {
+        return strcmp(getNomeAtor(a1), getNomeAtor(a2));
+    }
+
+    return result;
 }

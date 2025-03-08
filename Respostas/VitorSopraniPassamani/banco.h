@@ -72,10 +72,16 @@ void ordenaBanco(Banco* b);
 
 /**
  * @brief Função que cria uma copia de um banco.
- * @param destino Estrutura do tipo banco que receberá a cópia.
  * @param origem Estrutura original que será copiada.
+ * @return A copia do banco fornecido.
  */
-void copiaBanco(Banco* destino, Banco* origem);
+Banco* copiaBanco(Banco* origem);
+
+/**
+ * @brief funçao que desaloca a copia de um banco. É necessário que seja uma função diferente da desalocaBanco pois, 
+ * como criamos a copia apenas da referencia, perderiamos o dado também no banco original ao desalocar.
+ */
+void desalocaCopiaBanco(Banco* b);
 
 /**
  * @brief Função que compara dois atores pertencentes a um banco de acordo com sua função de callback.
