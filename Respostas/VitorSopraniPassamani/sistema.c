@@ -140,10 +140,28 @@ void insereAtorSistema(Sistema* sis, char* tipo) {
     Ator* a = NULL;
     if (strcmp("USUARIO", tipo) == 0) {
         Usuario* u = lerUsuario();
+        a = getAtorPorCPFBanco(sis->usuarios, cpf);
+
+        if (a != NULL) {
+            //Se o usuario ja existe no banco de usuarios ignora a leitura.
+            desalocaUsuario(u);
+            desalocaData(dataNascimento);
+            return;
+        }
+
         a = criaAtor(nome, cpf, dataNascimento, telefone, genero, u, desalocaUsuario, imprimeUsuario);
         insereAtorBanco(sis->usuarios, a);
     } else if (strcmp("TECNICO", tipo) == 0) {
         Tecnico* t = lerTecnico();
+        a = getAtorPorCPFBanco(sis->tecnicos, cpf);
+
+        if (a != NULL) {
+            //Se o tecnico ja existe no banco de tecnico ignora a leitura.
+            desalocaTecnico(t);
+            desalocaData(dataNascimento);
+            return;
+        }
+
         a = criaAtor(nome, cpf, dataNascimento, telefone, genero, t, desalocaTecnico, imprimeTecnico);
         insereAtorBanco(sis->tecnicos, a);
     } else {
@@ -165,9 +183,9 @@ void distribuiTicketsSistema(Sistema* sis) {
     Ator* atorAtual = NULL;
     Tecnico* tec = NULL;
 
+    int inicioRodadaTicket = 0;
+
     while (idxTicket < getQtdTicketsNaFila(sis->tickets)) {
-        int foiAtribuidoTicket = 0;
-        
         tickAtual = getTicketNaFila(sis->tickets, idxTicket);
         
         if (getStatusTicket(tickAtual) != 'A') {
@@ -182,17 +200,23 @@ void distribuiTicketsSistema(Sistema* sis) {
             int tempoTrabalho = getTempoEstimadoTicket(tickAtual);
             atribuiTrabalhoTecnico(tec, tempoTrabalho);
             finalizaTicket(tickAtual);
-            foiAtribuidoTicket = 1;
+
             idxTicket++;
+            idxAtor++;
+            if (idxAtor >= getTamanhoBanco(sis->tecnicos))
+                idxAtor = 0;
+            inicioRodadaTicket = idxAtor;
+
+            continue;
         }
         
         idxAtor++;
-
-        if (idxAtor >= getTamanhoBanco(sis->tecnicos)) {
+        if (idxAtor >= getTamanhoBanco(sis->tecnicos))
             idxAtor = 0;
-
-            if (!foiAtribuidoTicket)
-                idxTicket++;
+        
+        if (idxAtor == inicioRodadaTicket) {
+            idxTicket++;
+            inicioRodadaTicket = idxAtor;
         }
     }
 }
@@ -269,9 +293,37 @@ void notificaTicketsSistema(Sistema* sis) {
 
     printf("----- FILA DE TICKETS -----\n");
     notificaFila(sis->tickets);
-    printf("---------------------------\n");
+    printf("---------------------------\n\n");
 }
 
-void imprimeRankingSistema(Sistema* sis, char* tipo);
+void imprimeRankingSistema(Sistema* sis, char* tipo) {
+    #if DEBUG_SISTEMA
+        assert(sis != NULL);
+    #else
+        if (sis == NULL)
+            return;
+    #endif
+    
+    Banco* b = NULL;
+
+    if (strcmp("USUARIOS", tipo) == 0) {
+        b = copiaBanco(sis->usuarios);
+    } else if (strcmp("TECNICOS", tipo) == 0) {
+        b = copiaBanco(sis->tecnicos);
+    } else {
+        #if DEBUG_SISTEMA
+            printf("[ERRO] - na funcao imprimeRankingSistema.\n\tTipo nao identificado (%s).\n", tipo);
+        #else
+            return;
+        #endif
+    }
+
+    ordenaBanco(b);
+    printf("----- RANKING DE %s -----\n", tipo);
+    imprimeBanco(b);
+    printf("-------------------------------\n\n");
+
+    desalocaCopiaBanco(b);
+}
 
 void imprimeRelatorioSistema(Sistema* sis);
