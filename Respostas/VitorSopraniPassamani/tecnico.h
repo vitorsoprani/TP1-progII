@@ -70,4 +70,11 @@ void imprimeTecnico(void* dado);
  */
 int comparaTecnicos(void* dado1, void* dado2);
 
+/**
+ * @brief retorna o salario do tecnico.
+ * @param t o Tecnico.
+ * @return O salario do tecnico.
+ */
+float getSalarioTecnico(Tecnico* t);
+
 #endif

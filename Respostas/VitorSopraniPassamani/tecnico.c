@@ -139,3 +139,14 @@ int comparaTecnicos(void* dado1, void* dado2) {
 
     return CAST(Tecnico, dado2)->tempoTrabalhado - CAST(Tecnico, dado1)->tempoTrabalhado;
 }
+
+float getSalarioTecnico(Tecnico* t) {
+    #if DEBUG_TECNICO
+        assert(t != NULL);
+    #else
+        if (t == NULL)
+            return 0;
+    #endif
+
+    return t->salario;
+}
