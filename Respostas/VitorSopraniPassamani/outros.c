@@ -111,6 +111,6 @@ void notificaOutros(void* dado) {
     printf("- Tipo: Outros\n");
     printf("- Descricao: %s\n", CAST(Outros, dado)->descricao);
     printf("- Local: %s\n", CAST(Outros, dado)->local);
-    printf("- Nivel de dificuldade: %d\n", CAST(Outros, dado)->dificuldade);
-    printf("- Tempo estimado: %dh\n", CAST(Outros, dado)->tempoEstimado);
+    printf("- Nivel de Dificuldade: %d\n", CAST(Outros, dado)->dificuldade);
+    printf("- Tempo Estimado: %dh\n", CAST(Outros, dado)->tempoEstimado);
 }
