@@ -124,6 +124,17 @@ char* getCPFAtor(Ator* a) {
     return a->cpf;
 }
 
+char* getNomeAtor(Ator* a) {
+    #if DEBUG_ATOR
+        assert(a != NULL);
+    #else
+        if (a == NULL)
+            return NULL;
+    #endif
+
+    return a->nome;
+}
+
 void* getAtributoEspecificoAtor(Ator* a, fptr_getAtributoAtor getAtributo) {
     #if DEBUG_ATOR
         assert(a != NULL);

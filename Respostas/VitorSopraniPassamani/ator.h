@@ -26,25 +26,11 @@ typedef void (*fptr_desalocaAtor)(void* dado);
 typedef void (*fptr_imprimeAtor)(void* dado);
 
 /**
- * @brief Função de callback que retorna o tipo do ator.
- * @return 'T' para tecnico e 'U' para usuario
- */
-typedef char (*fptr_tipoAtor)();
-
-/**
  * @brief Função de callback que retorna um atributo especifico do ator
  * @param dado Ponteiro para o ator;
  * @return Um ponteiro para o atributo desejado.
  */
 typedef void* (*fptr_getAtributoAtor)(void* dado);
-
-/**
- * @brief Função de callback que compara dois atores de acordo com seus dados especificos.
- * @param dado1 Primeiro ator a ser comparado.
- * @param dado2 Segundo ator da comparacao.
- * @return Um número positivo se o dado1 deve vir depois do dado 2, um numero negativo se o dado1 deve vir antes do dado2, 0 se os dados são "empatados".
- */
-typedef int (*fptr_comparaAtor)(void* dado1, void* dado2);
 
 /**
  * @brief Aloca e inicializa os parametros de um tipo Ator de acordo com os dados passados.
@@ -56,7 +42,6 @@ typedef int (*fptr_comparaAtor)(void* dado1, void* dado2);
  * @param dado Ponteiro para a estrutura com os dados especificos do ator deste tipo (usuario ou tecnico).
  * @param desaloca Função de callback que desaloca um ator deste tipo especifico.
  * @param imprime Função de calback que imprime os dados de um ator dese tipo.
- * @param detTipo Função de calback que retrorna o tipo do ator.
  * @return Um ponteiro para uma estrutura do tipo Ator alocada dinamicamente e com os parametros inicializados.
  */
 Ator* criaAtor(char* nome, char* cpf, Data* dataNascimento, char* telefone, char* genero, void* dado, fptr_desalocaAtor desaloca, fptr_imprimeAtor imprime);
@@ -87,6 +72,13 @@ int getIdadeAtor(Ator* a, Data* dataAtual);
  * @return A string contendo o cpf do ator.
  */
 char* getCPFAtor(Ator* a);
+
+/**
+ * @brief retorna o noeme de um ator.
+ * @param a O ator.
+ * @return A string contendo o nome do ator.
+ */
+char* getNomeAtor(Ator* a);
 
 /**
  * @brief Função que retorna um atributo especifico do ator (de acordo com a função callback passada).
