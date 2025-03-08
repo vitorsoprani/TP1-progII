@@ -113,5 +113,5 @@ int comparaUsuarios(void* dado1, void* dado2) {
             return 0;
     #endif
 
-    return CAST(Usuario, dado1)->qtdTickets - CAST(Usuario, dado2)->qtdTickets;
+    return CAST(Usuario, dado2)->qtdTickets - CAST(Usuario, dado1)->qtdTickets;
 }

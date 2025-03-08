@@ -137,5 +137,5 @@ int comparaTecnicos(void* dado1, void* dado2) {
             return 0;
     #endif
 
-    return CAST(Tecnico, dado1)->tempoTrabalhado - CAST(Tecnico, dado2)->tempoTrabalhado;
+    return CAST(Tecnico, dado2)->tempoTrabalhado - CAST(Tecnico, dado1)->tempoTrabalhado;
 }
